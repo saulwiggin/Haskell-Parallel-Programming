@@ -1,0 +1,24 @@
+retry :: STM a
+or-else :: STM a -> STM a -> STM a	
+
+withdraw :: TVar Int -> Int -> STM ()
+
+withdraw acc n
+
+  = do { bal <- readTVar acc;
+
+              if bal < n then retry;
+
+              writeTVar acc (bal-n)
+
+            }
+
+atomically (do { withdraw a1 3
+
+                              ‘orElse‘
+
+                              withdraw a2 3;
+
+                              deposit b 3 }
+
+                     )

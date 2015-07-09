@@ -1,0 +1,1 @@
+	strat2 'dot' strat1 == strat2 . WithStrategy strat1
